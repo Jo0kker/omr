@@ -1,6 +1,6 @@
 {
-  "name": "jansenfelipe/omr",
-  "description": "Optical Mark Recognition from PHP",
+  "name": "jo0kker/omr",
+  "description": "Optical Mark Recognition from PHP (fork PHP 8.1+ de jansenfelipe/omr)",
   "type": "library",
   "license": "MIT",
   "authors": [
