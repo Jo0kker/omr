@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class ScanCommand extends Command
 {
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('scan')
@@ -37,32 +37,25 @@ class ScanCommand extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $imagePath = $input->getArgument('imageJPG');
         $mapJsonPath = $input->getArgument('mapJSON');
         $debug = $input->getOption('debug');
 
-        /*
-         * Setup scanner
-         */
         $scanner = new ImagickScanner();
         $scanner->setDebug($debug);
         $scanner->setImagePath($imagePath);
 
-        /*
-         * Setup map
-         */
         $map = MapJson::create($mapJsonPath);
 
-        /*
-         * Scan
-         */
         $result = $scanner->scan($map);
 
         $io = new SymfonyStyle($input, $output);
 
         $io->table(['id', 'marked'], $result->toArray()['targets']);
+
+        return Command::SUCCESS;
     }
 
 
